@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'
-import './fe/';
+import './App.css';
 
 function App() {
   const [name, setName] = useState("")
@@ -9,7 +9,7 @@ function App() {
     e.preventDefault()
 
     try {
-      await axios.post("http://localhost:5000/post_name", {
+      await axios.post("http://localhost:4000/post_name", {
         name
       })
     }
