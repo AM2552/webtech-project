@@ -6,10 +6,12 @@ body {
 
 .container {
   display: grid;
+  grid-template-columns: minmax(100px,500px) auto minmax(100px, 400px);
+  grid-template-rows: auto;
   grid-template-areas:
     "header header header"
     "leaderboard gameview chat"
-    "gametile gametile music";
+    "leaderboard gametile music";
   grid-gap: 10px;
 }
 
@@ -19,7 +21,7 @@ body {
   background-color: black;
   color: #ff6d00;
   padding: 20px;
-  font-size: 30px;
+  font-size: 20px;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
@@ -38,12 +40,15 @@ body {
   grid-area: leaderboard;
   background-color: #e0e0e0;
   padding: 20px;
+  width: 300px;
 }
 
 .gameview {
   grid-area: gameview;
   background-color: #f5f5f5;
   padding: 20px;
+  height: 500px;
+  width: 1160px;
 }
 
 .chat {
@@ -56,6 +61,7 @@ body {
   grid-area: gametile;
   background-color: #f5f5f5;
   padding: 20px;
+  width: 1160px;
 }
 
 .music {
@@ -78,4 +84,13 @@ th, td {
 th {
   background-color: #4CAF50;
   color: white;
+}
+
+.image-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.image-container img {
+  margin-right: 10px; /* Adjust the value as per your requirement */
 }

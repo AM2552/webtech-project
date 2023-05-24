@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 import './App.css';
+import SnakeGame from './SnakeGame';
+import snakeImage from './images/snake.png'
+import pacmanImage from './images/pacman.png'
+import breakoutImage from './images/breakout.png'
+import dinosaurImage from './images/dinosaur.jpg'
 
-function App() {
+
+
+const App = () => {
   const [name, setName] = useState("")
 
   async function postName(e) {
@@ -54,7 +61,7 @@ function App() {
                 </tr>
                 <tr>
                   <td>Player 3</td>
-                  <td>Galaga</td>
+                  <td>Snake</td>
                   <td>8000</td>
                 </tr>
               </tbody>
@@ -67,10 +74,12 @@ function App() {
 
           </div>
           <div class="gametile">
-            <form onSubmit={postName}>
-              <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-              <button type="submit">Send Name</button>
-            </form>
+            <div class="image-container">
+              <img src={snakeImage} style={{ width: '200px', height: '150px' }}></img>
+              <img src={pacmanImage} style={{ width: '200px', height: '150px' }}></img>
+              <img src={breakoutImage} style={{ width: '200px', height: '150px' }}></img>
+              <img src={dinosaurImage} style={{ width: '200px', height: '150px' }}></img>
+            </div>
           </div>
           <div class="music">
 
