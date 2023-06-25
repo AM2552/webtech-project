@@ -16,7 +16,7 @@ function App() {
       {!loggedIn ? (
         <LoginPage onLogin={handleLogin} />
       ) : (
-        <GamePage username={username} />
+        <GamePage username={username} onLogout={() => setLoggedIn(false)} />
       )}
     </div>
   );

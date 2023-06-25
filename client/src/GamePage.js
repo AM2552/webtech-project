@@ -1,10 +1,21 @@
 import React from 'react';
+import axios from 'axios';
 
-const GamePage = ({ username }) => {
+const GamePage = ({ onLogout }) => {
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:5000/api/logout');
+      onLogout();
+    } catch (error) {
+      console.error(error);
+      // Handle error
+    }
+  };
+
   return (
-    <div className="GamePage">
-      <h1>Welcome, {username}!</h1>
-      {/* Add your game content here */}
+    <div>
+      <h1>Welcome to the Game Page</h1>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };
