@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import LoginPage from './LoginPage';
 import GamePage from './GamePage';
+import './App.css';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
