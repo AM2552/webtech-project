@@ -8,7 +8,6 @@ const GamePage = ({ onLogout }) => {
       onLogout();
     } catch (error) {
       console.error(error);
-      // Handle error
     }
   };
 
@@ -52,6 +51,9 @@ const GamePage = ({ onLogout }) => {
 
     </div>
     <div className="chat">
+
+    </div>
+    <div className="gametile">
 
     </div>
     
