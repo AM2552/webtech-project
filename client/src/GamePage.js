@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import GameTiles from './GameTiles';
+import SpotifyPlayer from './SpotifyPlayer';
 
 const GamePage = ({ onLogout }) => {
   const handleLogout = async () => {
@@ -59,7 +60,7 @@ const GamePage = ({ onLogout }) => {
     </div>
     
     <div className="music">
-
+    <SpotifyPlayer />
     </div>
   </div>
   );

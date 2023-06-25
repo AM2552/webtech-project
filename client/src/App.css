@@ -72,13 +72,14 @@ body {
 .gametiles img {
   width: 200px;
   height: 150px;
-  margin-right: 100px;
+  margin-right: 50px;
 }
 
 .music {
   grid-area: music;
   background-color: #e0e0e0;
   padding: 20px;
+  justify-content: center;
 }
 
 table {
@@ -95,15 +96,4 @@ th, td {
 th {
   background-color: #4CAF50;
   color: white;
-}
-
-.image-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.image-container img {
-  width: 200px;
-  height: 150px;
-  margin-right: 10px;
 }

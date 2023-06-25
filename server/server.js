@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+// SESSION MANAGEMENT //
 app.use(
     session({
         secret: 'verylongkeytoensuresecurity123456789',
@@ -86,12 +87,73 @@ app.post('/api/logout', (req, res) => {
     });
 });
 
+// GAMETILES //
 // Endpoint to retrieve the list of image filenames
 app.get('/api/public/images', (req, res) => {
     const images = ['snake.png', 'breakout.png', 'pacman.png'];
     res.json(images);
-  });
+});
 
+// SPOTIFY-API //
+const SpotifyWebApi = require('spotify-web-api-node');
+
+const spotifyApi = new SpotifyWebApi({
+    clientId: 'd53a8f38cd4c4c8d81eb471bdbbfbb39',
+    clientSecret: '8823bdcc54674f06bbd6eef0ae4bbe19',
+});
+
+const getAccessToken = async () => {
+    try {
+        const data = await spotifyApi.clientCredentialsGrant();
+        const { access_token } = data.body;
+        spotifyApi.setAccessToken(access_token);
+        return access_token;
+    } catch (error) {
+        console.error('Error retrieving access token:', error);
+        throw error;
+    }
+};
+
+// Endpoint to search for playlists by keyword
+app.get('/api/spotify/playlists', async (req, res) => {
+    const { keyword } = req.query;
+
+    try {
+        // Get access token
+        const accessToken = await getAccessToken();
+
+        // Make API request to search for playlists
+        const { body } = await spotifyApi.searchPlaylists(keyword, { limit: 5 });
+
+        // Send the list of matching playlists in the response
+        res.json(body.playlists.items);
+    } catch (error) {
+        console.error('Error searching for playlists:', error);
+        res.status(500).json({ error: 'Unable to search for playlists' });
+    }
+});
+
+// Endpoint to retrieve the playlist ID by playlist URI
+app.get('/api/spotify/playlist/:playlistId', async (req, res) => {
+    const { playlistId } = req.params;
+
+    try {
+        // Get access token
+        const accessToken = await getAccessToken();
+
+        // Make API request to get playlist details
+        const { body } = await spotifyApi.getPlaylist(playlistId);
+
+        // Send the playlist ID in the response
+        res.json({ playlistId: body.id });
+    } catch (error) {
+        console.error('Error retrieving playlist ID:', error);
+        res.status(500).json({ error: 'Unable to retrieve playlist ID' });
+    }
+});
+
+
+// SERVER STARTUP //
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
