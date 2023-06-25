@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import GameTiles from './GameTiles';
 
 const GamePage = ({ onLogout }) => {
   const handleLogout = async () => {
@@ -53,8 +54,8 @@ const GamePage = ({ onLogout }) => {
     <div className="chat">
 
     </div>
-    <div className="gametile">
-
+    <div className="gametiles">
+    <GameTiles />
     </div>
     
     <div className="music">

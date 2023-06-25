@@ -28,13 +28,10 @@ const LoginPage = ({ onLogin }) => {
         const { success } = loginResponse.data;
         if (success) {
           onLogin(username);
-        } else {
-          alert('Username already exists.\n Password does not match username');
         }
       }
     } catch (error) {
-      console.error(error);
-      alert('An error occurred');
+      alert('Username already exists.\nPassword does not match username.');
     }
   };
 

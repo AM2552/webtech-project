@@ -2,7 +2,6 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const PORT = 5000;
@@ -10,6 +9,7 @@ const PORT = 5000;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
 app.use(
     session({
@@ -85,6 +85,12 @@ app.post('/api/logout', (req, res) => {
         }
     });
 });
+
+// Endpoint to retrieve the list of image filenames
+app.get('/api/public/images', (req, res) => {
+    const images = ['snake.png', 'breakout.png', 'pacman.png'];
+    res.json(images);
+  });
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

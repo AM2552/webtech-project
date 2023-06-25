@@ -1,22 +1,31 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const GameTiles = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/images')
-      .then((response) => response.json())
-      .then((data) => setImages(data.images))
-      .catch((error) => console.error('Error fetching images:', error));
+    const fetchImages = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/public/images');
+        setImages(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchImages();
   }, []);
 
   return (
-    <div className="gametile">
-      <div className="image-container">
-        {images.map((image, index) => (
-          <img key={index} src={`/resources${image}`} alt={`Game ${index + 1}`} />
-        ))}
-      </div>
+    <div className="gametiles">
+      {images.map((image) => (
+        <img
+          key={image}
+          src={`http://localhost:5000/images/${image}`}
+          alt={image}
+        />
+      ))}
     </div>
   );
 };
