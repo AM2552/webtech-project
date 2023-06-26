@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client';
 import GifSearch from './GifSearch';
 
 const ChatWindow = ({ username }) => {
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState('');
+  const messagesContainerRef = useRef(null);
 
   useEffect(() => {
     const socket = io('http://localhost:5001');
@@ -22,6 +23,13 @@ const ChatWindow = ({ username }) => {
       }
     });
   }, [username]);
+
+  useEffect(() => {
+    // Scroll to the bottom of the messages container when new messages are added
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   const handleMessageSubmit = (e) => {
     e.preventDefault();
@@ -55,8 +63,8 @@ const ChatWindow = ({ username }) => {
   };
 
   return (
-    <div>
-      <div className="messages">
+    <div className="chat-window">
+      <div className="messages" ref={messagesContainerRef}>
         {messages.map((message, index) => (
           <div key={index} className={`message ${message.isGif ? 'gif-message' : ''}`}>
             {message.time} {message.username}:{' '}
@@ -68,6 +76,7 @@ const ChatWindow = ({ username }) => {
       <form onSubmit={handleMessageSubmit}>
         <input
           type="text"
+          placeholder="Enter your message"
           value={messageInput}
           onChange={(e) => setMessageInput(e.target.value)}
         />

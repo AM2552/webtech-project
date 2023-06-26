@@ -24,10 +24,11 @@ const GifSearch = ({ onReceiveGif }) => {
       <form onSubmit={handleSearchSubmit}>
         <input
           type="text"
+          placeholder="Enter a keyword"
           value={searchKeyword}
           onChange={(e) => setSearchKeyword(e.target.value)}
         />
-        <button type="submit">Search GIF</button>
+        <button type="submit">Random Giphy</button>
       </form>
     </div>
   );
