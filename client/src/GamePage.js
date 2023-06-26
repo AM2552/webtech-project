@@ -56,6 +56,7 @@ const GamePage = ({ username, onLogout }) => {
     <div className="chat">
     <ChatWindow username={username} />
     </div>
+    
     <div className="gametiles">
     <GameTiles />
     </div>

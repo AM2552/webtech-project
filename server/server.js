@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const http = require('http');
 const socketIO = require('socket.io');
+const axios = require('axios'); 
 
 const app = express();
 const PORT = 5000;
@@ -155,6 +156,27 @@ app.get('/api/spotify/playlist/:playlistId', async (req, res) => {
     }
 });
 
+// GIPHY API //
+app.post('/api/giphy', async (req, res) => {
+    const { keyword } = req.body;
+    const apiKey = 'k2NEawKvUbvI9LJ4I5BAr4mIOpLIiCiC';
+    const url = `https://api.giphy.com/v1/gifs/random?api_key=${apiKey}&tag=${encodeURIComponent(keyword)}`;
+  
+    try {
+      const response = await axios.get(url);
+  
+      if (response.status === 200) {
+        const gif = response.data.data.images.downsized.url;
+        res.json({ gif });
+      } else {
+        console.error('Error:', response.data.error);
+        res.status(500).json({ error: 'Failed to retrieve gif from Giphy' });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: 'Failed to retrieve gif from Giphy' });
+    }
+  });
 
 // CHAT WINDOW //
 const server = http.createServer(app);
@@ -169,9 +191,13 @@ const io = socketIO(server, {
 
 io.on('connection', (socket) => {
     socket.on('chat-message', (message) => {
-        io.emit('chat-message', message);
+      io.emit('chat-message', message);
     });
-});
+  
+    socket.on('gif-message', (message) => {
+      io.emit('chat-message', message); // Emit the gif message as a 'chat-message'
+    });
+  });
 
 // SERVER STARTUP
 server.listen(PORT, () => {
