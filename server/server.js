@@ -2,9 +2,12 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const http = require('http');
+const socketIO = require('socket.io');
 
 const app = express();
 const PORT = 5000;
+const CHAT_PORT = 5001;
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -153,7 +156,28 @@ app.get('/api/spotify/playlist/:playlistId', async (req, res) => {
 });
 
 
-// SERVER STARTUP //
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+// CHAT WINDOW //
+const server = http.createServer(app);
+const io = socketIO(server, {
+    cors: {
+        origin: 'http://localhost:3000',
+        methods: ['GET', 'POST'],
+        allowedHeaders: ['Content-Type'],
+        credentials: true,
+    },
 });
+
+io.on('connection', (socket) => {
+    socket.on('chat-message', (message) => {
+        io.emit('chat-message', message);
+    });
+});
+
+// SERVER STARTUP
+server.listen(PORT, () => {
+    console.log(`Express server is running on http://localhost:${PORT}`);
+});
+
+// Start the chat server
+io.listen(CHAT_PORT);
+console.log(`Chat server is running on http://localhost:${CHAT_PORT}`);

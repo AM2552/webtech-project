@@ -2,8 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import GameTiles from './GameTiles';
 import SpotifyPlayer from './SpotifyPlayer';
+import ChatWindow from './ChatWindow';
 
-const GamePage = ({ onLogout }) => {
+const GamePage = ({ username, onLogout }) => {
   const handleLogout = async () => {
     try {
       await axios.post('http://localhost:5000/api/logout');
@@ -53,7 +54,7 @@ const GamePage = ({ onLogout }) => {
 
     </div>
     <div className="chat">
-
+    <ChatWindow username={username} />
     </div>
     <div className="gametiles">
     <GameTiles />
