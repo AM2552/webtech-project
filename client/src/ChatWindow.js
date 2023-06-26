@@ -72,16 +72,18 @@ const ChatWindow = ({ username }) => {
           </div>
         ))}
       </div>
-      <GifSearch onReceiveGif={handleReceiveGif} />
-      <form onSubmit={handleMessageSubmit}>
-        <input
-          type="text"
-          placeholder="Enter your message"
-          value={messageInput}
-          onChange={(e) => setMessageInput(e.target.value)}
-        />
-        <button type="submit">Send</button>
-      </form>
+      <div className="input-container">
+        <GifSearch onReceiveGif={handleReceiveGif} />
+        <form onSubmit={handleMessageSubmit} className="message-form">
+          <input
+            type="text"
+            placeholder="Enter your message"
+            value={messageInput}
+            onChange={(e) => setMessageInput(e.target.value)}
+          />
+          <button type="submit">Send</button>
+        </form>
+      </div>
     </div>
   );
 };

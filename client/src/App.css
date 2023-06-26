@@ -30,16 +30,6 @@ body {
   letter-spacing: 2px;
 }
 
-.header:before {
-  content: "";
-  display: block;
-  width: 100px;
-  height: 10px;
-  background-color: #ff6d00;
-  margin: 0 auto;
-  margin-bottom: 20px;
-}
-
 .leaderboard {
   grid-area: leaderboard;
   background-color: #e0e0e0;
@@ -56,6 +46,44 @@ body {
   grid-area: chat;
   background-color: #e0e0e0;
   padding: 20px;
+  justify-content: center;
+  align-content: center;
+}
+
+.chat-window {
+  grid-area: chat;
+  background-color: #e0e0e0;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.messages {
+  max-height: 300px; 
+  max-width: 400px;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.message {
+  margin-bottom: 10px;
+}
+
+.gif-message img {
+  display: block;
+  max-width: 95%;
+  height: auto;
+  margin-top: 5px;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  max-width: 400px;
 }
 
 .gametiles {
