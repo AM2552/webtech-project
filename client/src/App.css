@@ -40,6 +40,40 @@ body {
   grid-area: gameview;
   background-color: #f5f5f5;
   padding: 20px;
+  display: grid;
+  place-items: center; /* Center the content */
+}
+
+.snake-game {
+  display: inline-block;
+  position: relative;
+}
+
+.score {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(40, 1fr);
+  grid-template-rows: repeat(40, 1fr);
+  gap: 1px;
+}
+
+.cell {
+  width: 15px;
+  height: 15px;
+  background-color: #ccc;
+}
+
+.snake {
+  background-color: #333;
+}
+
+.food {
+  background-color: red;
 }
 
 .chat {
@@ -62,7 +96,7 @@ body {
 }
 
 .messages {
-  max-height: 300px; 
+  max-height: 300px;
   max-width: 400px;
   overflow-x: auto;
   overflow-y: auto;
@@ -94,13 +128,20 @@ body {
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
-  
 }
 
 .gametiles img {
   width: 200px;
   height: 150px;
   margin-right: 50px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.gametiles img:hover {
+  opacity: 0.8;
 }
 
 .music {

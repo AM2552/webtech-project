@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const GameTiles = () => {
+const GameTiles = ({ onGameToggle }) => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
@@ -17,6 +17,10 @@ const GameTiles = () => {
     fetchImages();
   }, []);
 
+  const handleImageClick = () => {
+    onGameToggle();
+  };
+
   return (
     <div className="gametiles">
       {images.map((image) => (
@@ -24,6 +28,8 @@ const GameTiles = () => {
           key={image}
           src={`http://localhost:5000/images/${image}`}
           alt={image}
+          onClick={handleImageClick}
+          style={{ cursor: 'pointer' }}
         />
       ))}
     </div>
