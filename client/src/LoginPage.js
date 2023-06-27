@@ -24,7 +24,7 @@ const LoginPage = ({ onLogin }) => {
       } else {
         // Username exists, validate the password
         const loginData = { username, password };
-        const loginResponse = await axios.post('http://localhost:5000/api/login', loginData);
+        const loginResponse = await axios.put('http://localhost:5000/api/login', loginData);
         const { success } = loginResponse.data;
         if (success) {
           onLogin(username);

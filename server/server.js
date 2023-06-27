@@ -54,7 +54,7 @@ app.post('/api/signup', (req, res) => {
 });
 
 // Endpoint to handle login and validate the username and password
-app.post('/api/login', (req, res) => {
+app.put('/api/login', (req, res) => {
     const { username, password } = req.body;
 
     // Find the session user with the matching username
@@ -73,7 +73,7 @@ app.post('/api/login', (req, res) => {
 });
 
 // Endpoint to handle logout and destroy the session
-app.post('/api/logout', (req, res) => {
+app.delete('/api/logout', (req, res) => {
     const sessionUserIndex = sessionUsers.findIndex((user) => user.id === req.session.id);
 
     if (sessionUserIndex !== -1) {

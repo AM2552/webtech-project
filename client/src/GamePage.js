@@ -8,7 +8,7 @@ import SnakeGame from './SnakeGame';
 const GamePage = ({ username, onLogout }) => {
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:5000/api/logout');
+      await axios.delete('http://localhost:5000/api/logout');
       onLogout();
     } catch (error) {
       console.error(error);
