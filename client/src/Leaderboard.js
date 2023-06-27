@@ -17,10 +17,6 @@ const Leaderboard = ({ username }) => {
           return updatedScores;
         });
     });
-
-    return () => {
-      socket.disconnect();
-    };
   }, [username]);
 
   return (
