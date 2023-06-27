@@ -2,10 +2,10 @@ import React, { useEffect, useState, useRef } from 'react';
 
 const SnakeGame = () => {
   const [snake, setSnake] = useState([{ x: 10, y: 10 }]);
-  
   const [direction, setDirection] = useState('right');
   const [score, setScore] = useState(0);
   const gameRef = useRef(null);
+  const [gameStarted, setGameStarted] = useState(false);
 
   const getRandomFoodPosition = () => {
     return {
@@ -21,6 +21,8 @@ const SnakeGame = () => {
 
   useEffect(() => {
     const handleKeyPress = (event) => {
+      if (!gameStarted) return;
+
       if (event.keyCode === 37 && direction !== 'right') {
         setDirection('left');
       } else if (event.keyCode === 38 && direction !== 'down') {
@@ -37,10 +39,12 @@ const SnakeGame = () => {
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
     };
-  }, [direction]);
+  }, [direction, gameStarted]);
 
   useEffect(() => {
     const moveSnake = () => {
+      if (!gameStarted) return;
+
       const head = { ...snake[0] };
 
       switch (direction) {
@@ -65,6 +69,8 @@ const SnakeGame = () => {
     };
 
     const checkCollision = () => {
+      if (!gameStarted) return;
+
       const head = snake[0];
 
       // Check if snake hits the walls
@@ -97,7 +103,7 @@ const SnakeGame = () => {
     return () => {
       clearInterval(gameLoop);
     };
-  }, [snake, direction, food]);
+  }, [snake, direction, food, gameStarted]);
 
   const growSnake = () => {
     const tail = { ...snake[snake.length - 1] };
@@ -109,6 +115,11 @@ const SnakeGame = () => {
     setSnake([{ x: 10, y: 10 }]);
     setDirection('right');
     setScore(0);
+    setGameStarted(false);
+  };
+
+  const handleStartGame = () => {
+    setGameStarted(true);
   };
 
   const renderGrid = () => {
@@ -147,6 +158,11 @@ const SnakeGame = () => {
       tabIndex={0}
       style={{ outline: 'none' }}
     >
+      {!gameStarted && (
+        <button className="start-button" onClick={handleStartGame}>
+          Start Game
+        </button>
+      )}
       <div className="score">Score: {score}</div>
       <div className="grid">{renderGrid()}</div>
     </div>

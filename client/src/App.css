@@ -45,8 +45,21 @@ body {
 }
 
 .snake-game {
-  display: inline-block;
   position: relative;
+}
+
+.start-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+  padding: 10px;
+  background-color: #ff6d00;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .score {
