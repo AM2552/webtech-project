@@ -1,11 +1,30 @@
 import React, { useEffect, useState, useRef } from 'react';
+import io from 'socket.io-client';
 
-const SnakeGame = () => {
+const SnakeGame = ({ username }) => {
   const [snake, setSnake] = useState([{ x: 10, y: 10 }]);
   const [direction, setDirection] = useState('right');
   const [score, setScore] = useState(0);
   const gameRef = useRef(null);
   const [gameStarted, setGameStarted] = useState(false);
+
+  const handleGameOver = () => {
+    const socket = io('http://localhost:5001');
+    socket.emit('highscore-entry', {
+      username: username,
+      gametype: 'Snake',
+      score: score,
+    });
+  };
+
+  const gameOver = () => {
+    alert('Game over!');
+    setSnake([{ x: 10, y: 10 }]);
+    setDirection('right');
+    setScore(0);
+    setGameStarted(false);
+    handleGameOver();
+  };
 
   const getRandomFoodPosition = () => {
     return {
@@ -103,19 +122,11 @@ const SnakeGame = () => {
     return () => {
       clearInterval(gameLoop);
     };
-  }, [snake, direction, food, gameStarted]);
+  }, [snake, direction, food, gameStarted, gameOver]);
 
   const growSnake = () => {
     const tail = { ...snake[snake.length - 1] };
     setSnake((prevSnake) => [...prevSnake, tail]);
-  };
-
-  const gameOver = () => {
-    alert('Game over!');
-    setSnake([{ x: 10, y: 10 }]);
-    setDirection('right');
-    setScore(0);
-    setGameStarted(false);
   };
 
   const handleStartGame = () => {

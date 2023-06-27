@@ -25,7 +25,6 @@ app.use(
     })
 );
 
-// Temporary session storage
 let sessionUsers = [];
 
 // Endpoint to check if a username is available
@@ -195,7 +194,11 @@ io.on('connection', (socket) => {
     });
   
     socket.on('gif-message', (message) => {
-      io.emit('chat-message', message); // Emit the gif message as a 'chat-message'
+      io.emit('chat-message', message);
+    });
+
+    socket.on('highscore-entry', (score) => {
+        io.emit('highscore-entry', score);
     });
   });
 

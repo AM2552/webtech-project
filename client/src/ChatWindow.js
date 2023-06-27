@@ -80,6 +80,7 @@ const ChatWindow = ({ username }) => {
             placeholder="Enter your message"
             value={messageInput}
             onChange={(e) => setMessageInput(e.target.value)}
+            required
           />
           <button type="submit">Send</button>
         </form>

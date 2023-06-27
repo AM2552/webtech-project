@@ -27,6 +27,7 @@ const GifSearch = ({ onReceiveGif }) => {
           placeholder="Enter a keyword"
           value={searchKeyword}
           onChange={(e) => setSearchKeyword(e.target.value)}
+          required
         />
         <button type="submit">Random Giphy</button>
       </form>
