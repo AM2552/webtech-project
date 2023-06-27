@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 
 const SnakeGame = () => {
-  const [snake, setSnake] = useState([{ x: 20, y: 20 }]);
+  const [snake, setSnake] = useState([{ x: 10, y: 10 }]);
   
   const [direction, setDirection] = useState('right');
   const [score, setScore] = useState(0);
@@ -9,8 +9,8 @@ const SnakeGame = () => {
 
   const getRandomFoodPosition = () => {
     return {
-      x: Math.floor(Math.random() * 40),
-      y: Math.floor(Math.random() * 40),
+      x: Math.floor(Math.random() * 25),
+      y: Math.floor(Math.random() * 25),
     };
   };
   const [food, setFood] = useState(getRandomFoodPosition());
@@ -68,7 +68,7 @@ const SnakeGame = () => {
       const head = snake[0];
 
       // Check if snake hits the walls
-      if (head.x < 0 || head.x >= 40 || head.y < 0 || head.y >= 40) {
+      if (head.x < 0 || head.x >= 25 || head.y < 0 || head.y >= 25) {
         gameOver();
         return;
       }
@@ -106,7 +106,7 @@ const SnakeGame = () => {
 
   const gameOver = () => {
     alert('Game over!');
-    setSnake([{ x: 20, y: 20 }]);
+    setSnake([{ x: 10, y: 10 }]);
     setDirection('right');
     setScore(0);
   };
@@ -114,8 +114,8 @@ const SnakeGame = () => {
   const renderGrid = () => {
     const grid = [];
 
-    for (let row = 0; row < 40; row++) {
-      for (let col = 0; col < 40; col++) {
+    for (let row = 0; row < 25; row++) {
+      for (let col = 0; col < 25; col++) {
         let cellClass = 'cell';
 
         // Check if cell is part of the snake
