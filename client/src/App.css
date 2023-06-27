@@ -1,0 +1,181 @@
+.LoginPage {
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "leaderboard gameview chat"
+    "gametiles gametiles music";
+  grid-gap: 10px;
+  height: 100vh;
+  width: 100vw;
+}
+
+.header {
+  grid-area: header;
+  text-align: center;
+  background-color: black;
+  color: #ff6d00;
+  padding: 20px;
+  font-size: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.leaderboard {
+  grid-area: leaderboard;
+  background-color: #e0e0e0;
+  padding: 20px;
+}
+
+.gameview {
+  grid-area: gameview;
+  background-color: #f5f5f5;
+  padding: 20px;
+  display: grid;
+  place-items: center;
+}
+
+.snake-game {
+  position: relative;
+}
+
+.start-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+  padding: 10px;
+  background-color: #ff6d00;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.score {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(25, 1fr);
+  grid-template-rows: repeat(25, 1fr);
+  gap: 1px;
+}
+
+.cell {
+  width: 15px;
+  height: 15px;
+  background-color: #ccc;
+}
+
+.snake {
+  background-color: #333;
+}
+
+.food {
+  background-color: red;
+}
+
+.chat {
+  grid-area: chat;
+  background-color: #e0e0e0;
+  padding: 20px;
+  justify-content: center;
+  align-content: center;
+}
+
+.chat-window {
+  grid-area: chat;
+  background-color: #e0e0e0;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.messages {
+  max-height: 300px;
+  max-width: 400px;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.message {
+  margin-bottom: 10px;
+}
+
+.gif-message img {
+  display: block;
+  max-width: 95%;
+  height: auto;
+  margin-top: 5px;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  max-width: 400px;
+}
+
+.gametiles {
+  grid-area: gametiles;
+  background-color: #f5f5f5;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.gametiles img {
+  width: 200px;
+  height: 150px;
+  margin-right: 50px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.gametiles img:hover {
+  opacity: 0.8;
+}
+
+.music {
+  grid-area: music;
+  background-color: #e0e0e0;
+  padding: 20px;
+  justify-content: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
