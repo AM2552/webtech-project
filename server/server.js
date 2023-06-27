@@ -156,7 +156,7 @@ app.get('/api/spotify/playlist/:playlistId', async (req, res) => {
 });
 
 // GIPHY API //
-app.post('/api/giphy', async (req, res) => {
+app.get('/api/giphy', async (req, res) => {
     const { keyword } = req.body;
     const apiKey = 'k2NEawKvUbvI9LJ4I5BAr4mIOpLIiCiC';
     const url = `https://api.giphy.com/v1/gifs/random?api_key=${apiKey}&tag=${encodeURIComponent(keyword)}`;
