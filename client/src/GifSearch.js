@@ -8,7 +8,7 @@ const GifSearch = ({ onReceiveGif }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.get('http://localhost:5000/api/giphy', { keyword: searchKeyword });
+      const response = await axios.post('http://localhost:5000/api/giphy', { keyword: searchKeyword });
       const { gif } = response.data;
 
       onReceiveGif(gif);
