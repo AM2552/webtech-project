@@ -18,7 +18,7 @@ const SnakeGame = ({ username }) => {
   };
 
   const gameOver = () => {
-    alert('Game over!');
+    //alert('Game over!');
     setSnake([{ x: 10, y: 10 }]);
     setDirection('right');
     setScore(0);
